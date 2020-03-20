@@ -25,6 +25,7 @@ const SideBar=()=>
 									<a href="#" className="has-ul legitRipple"><i className="icon-stack2"></i> <span>Products</span><span className="legitRipple-ripple"></span></a>
 									<ul className="hidden-ul">
 										<li><Link to="/add-new-product" className="legitRipple">Add New</Link></li>
+										<li><Link to="/product-list" className="legitRipple">Product List</Link></li>
 									</ul>
 								</li>
                                 

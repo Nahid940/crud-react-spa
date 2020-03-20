@@ -8,6 +8,7 @@ import Dashboard from './pages/dashboard.component';
 import SideBar from './pages/side-bar.component';
 import { Route } from 'react-router-dom'
 import AddNewProduct from './pages/product/add-new-product.component';
+import ProductList from './pages/product/product-list.component'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
                 <div className="content-wrapper">
                     <Route exact path="/" component={Dashboard} />
                     <Route exact path="/add-new-product" component={AddNewProduct}/>
+                    <Route exact path="/product-list" component={ProductList}/>
                 </div>
             </div>
         </div>
