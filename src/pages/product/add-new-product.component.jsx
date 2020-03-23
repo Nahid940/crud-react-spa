@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import alertify from 'alertifyjs'
 import axios from 'axios'
+import CustomButton from '../../component/custom-button/custom-button.component'
 
 
 const AddNewProduct=(props)=>
@@ -110,6 +111,7 @@ const AddNewProduct=(props)=>
                         unit:'',
                         description:''
                     })
+                    props.history.push('/product-list')
                 }
             }
         )}
@@ -117,12 +119,9 @@ const AddNewProduct=(props)=>
         );
     }
 
-
     return(
-        
         <div className="row">
             <form action="#" onSubmit={handleSubmit} id="form">
-                
                     <div className="panel panel-flat">
                         <div className="panel-heading">
                             <h5 className="panel-title">Add New Product<a className="heading-elements-toggle"><i className="icon-more"></i></a></h5>
@@ -176,7 +175,8 @@ const AddNewProduct=(props)=>
                                     <input type="file" name="model" name="image" onChange={handleChange} className="form-control"/>
                                 </div>
                                 <div className="text-right">
-                                    <button type="submit"  className="btn btn-primary legitRipple">Submit form <i className="icon-arrow-right14 position-right"></i></button>
+                                    <CustomButton type={'submit'} icon={'icon-arrow-right14 position-right'} btnclass={'info'} title={'Add New Product'}/>
+                                    {/* <button type="submit"  className="btn btn-primary legitRipple">Submit form <i className="icon-arrow-right14 position-right"></i></button> */}
                                 </div>
                             </div>
                         </div>
