@@ -9,6 +9,7 @@ import SideBar from './pages/side-bar.component';
 import { Route } from 'react-router-dom'
 import AddNewProduct from './pages/product/add-new-product.component';
 import ProductList from './pages/product/product-list.component'
+import Sale from './pages/sales/sale.component'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                     <Route exact path="/" component={Dashboard} />
                     <Route exact path="/add-new-product" component={AddNewProduct}/>
                     <Route exact path="/product-list" component={ProductList}/>
+                    <Route exact path="/new-sale" component={Sale}/>
                 </div>
             </div>
         </div>

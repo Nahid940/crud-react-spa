@@ -28,6 +28,13 @@ const SideBar=()=>
 										<li><Link to="/product-list" className="legitRipple">Product List</Link></li>
 									</ul>
 								</li>
+                                <li className="">
+									<a href="#" className="has-ul legitRipple"><i className="icon-stack2"></i> <span>Sale</span><span className="legitRipple-ripple"></span></a>
+									<ul className="hidden-ul">
+										<li><Link to="/new-sale" className="legitRipple">Add Sale</Link></li>
+								
+									</ul>
+								</li>
                                 
                             </ul>
                         </div>
