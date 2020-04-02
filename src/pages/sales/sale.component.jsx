@@ -6,19 +6,11 @@ const Sale=()=>
 {
 
     const [product,setProduct]=useState([
-        {
-            id:1,
-            product_title:"Item 1",
-            quantity:2,
-            price:100.00
-        },
-        {
-            id:2,
-            product_title:"Item 2",
-            quantity:3,
-            price:300.00
-        },
+        
     ])
+
+    const [total,setTotal]=useState(0)
+    const [totalItem,setTotalItem]=useState(0)
 
     const handleChange=(id,input_type,value)=>
     {
@@ -46,12 +38,47 @@ const Sale=()=>
         }
     }
 
+    const countTotal=(items)=>
+    {
+        const total = product.reduce((accumulated, cur) => {
+            return accumulated + cur.quantity * cur.price;
+        }, 0);
+
+        const total_qty=product.reduce((accumulated,curr)=>{
+            return accumulated+parseFloat(curr.quantity===''?0:curr.quantity)
+        },0)
+
+        setTotalItem(total_qty)
+        setTotal(total)
+    }
+
+    const addNwItem=()=>
+    {
+        const item={
+            id: product.length?product[product.length-1].id+1:1,
+            product_title:'',
+            quantity:0,
+            price:0.00,
+        }
+        setProduct([...product,item])
+    }
+    useEffect(()=>{
+        countTotal(product)
+    },[product])
+
+    const removeItem=(id)=>
+    {
+        const newItems=product.filter(item=>item.id!=id)
+        setProduct(newItems)
+    }
+
     return(
         <div className="row">
             <form action="#" id="form">
                     <div className="panel panel-flat">
                         <div className="panel-body">
                             <div className="col-md-8">
+                                <a onClick={addNwItem} className="btn btn-success">+</a>
                                 <div className="table-responsive">
                                     <table  className="table">
                                         <thead>
@@ -65,7 +92,7 @@ const Sale=()=>
 
                                         <tbody>
                                             {product.length?
-                                                product.map((prcdt,index)=><Cart item={prcdt} index={index} changeFuction={handleChange} key={index}/>)
+                                                product.map((prcdt,index)=><Cart item={prcdt} index={index} remove={removeItem} changeFuction={handleChange} key={index}/>)
                                             :''}
                                         </tbody>
                                     </table>
@@ -74,6 +101,22 @@ const Sale=()=>
 
                             <div className="col-md-4">
                                 <h3>Summery </h3>
+                                <table className="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Customer Name</td>
+                                            <td><input type="text" className="form-control"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Item(s)</td>
+                                            <td>{totalItem}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Amount</td>
+                                            <td>{total}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>  
