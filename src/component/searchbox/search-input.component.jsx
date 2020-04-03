@@ -1,4 +1,4 @@
-import React, { Component,useEffect,useState } from 'react'
+import React, { Component,useEffect,useState,useRef } from 'react'
 import './styles.css'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
@@ -9,12 +9,15 @@ const SearchInput=(props)=>
     const [searchValue,setSearchValue]=useState('')
     const [results,setResults]=useState([])
     const [item,setItem]=useState({})
+    const inputRef=useRef("")
+
 
     const handleChange=(e)=>
     {
         e.preventDefault()
         const {name,value}=e.target
         setSearchValue(value)
+        props.handleShowResult(true)
     }
     
     useEffect(()=>{
@@ -27,27 +30,23 @@ const SearchInput=(props)=>
             cancelToken:new axios.CancelToken(c=>cancel=c)
         }).then(res=>{
             setResults(res.data.products)
+            // res.data.products.length?props.handleShowResult(true):props.handleShowResult(false)
         }).catch(e=>{
             if(axios.isCancel(e)) return 
         })
         return()=> cancel()
     },[searchValue])
 
-    // const addItem=(key)=>
-    // {
-    //     const item=results[key]
-    //     setItem(item)
-    //     console.log(item)
-    // }
     return (
         <div className="col-md-12">
+            <h3>Search item by name</h3>
             <div className="form-group has-feedback">
-                <input type="text" className="form-control" onChange={handleChange} placeholder="Search Product Here...."/>
+                <input type="text" ref={props.myref} className="form-control" onChange={handleChange} placeholder="Search Product Here...."/>
                 <div className="form-control-feedback">
                     <i className="icon-search4 text-size-base"></i>
                 </div>
             </div>
-            <div className={results.length>=1?'search-reasult':"search-reasult result-hidden"}>
+            <div className={results.length>=1 && props.showResult?'search-reasult':"search-reasult result-hidden"}>
                 <ul>
                     {
                         results.map((result,index)=>(

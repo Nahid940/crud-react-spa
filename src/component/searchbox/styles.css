@@ -2,7 +2,7 @@
 {
     background:#e8e8d5;
     height: auto;
-    width:100%;
+    width:97%;
     position:absolute;
     margin-top:-20px;
     z-index:1;
@@ -12,6 +12,7 @@
 ul{
     padding-left: 0px;
     margin-top: 0px;
+    margin-bottom: 0px!important;
 }
 
 .search-reasult ul li{

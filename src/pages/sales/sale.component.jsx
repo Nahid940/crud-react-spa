@@ -1,4 +1,4 @@
-import React, { Component,useEffect,useState } from 'react'
+import React, { Component,useEffect,useState,useRef } from 'react'
 import Cart from '../../component/cart/cart.component'
 import arertify from 'alertifyjs'
 import SearchInput from '../../component/searchbox/search-input.component'
@@ -10,8 +10,11 @@ const Sale=()=>
         
     ])
 
+    const ref_input=useRef(null)
+
     const [total,setTotal]=useState(0)
     const [totalItem,setTotalItem]=useState(0)
+    const [showResult,setShowREsult]=useState(false)
 
     const handleChange=(id,input_type,value)=>
     {
@@ -53,16 +56,16 @@ const Sale=()=>
         setTotal(total)
     }
 
-    const addNwItem=()=>
-    {
-        const item={
-            id: product.length?product[product.length-1].id+1:1,
-            product_title:'',
-            quantity:0,
-            price:0.00,
-        }
-        setProduct([...product,item])
-    }
+    // const addNwItem=()=>
+    // {
+    //     const item={
+    //         id: product.length?product[product.length-1].id+1:1,
+    //         product_title:'',
+    //         quantity:0,
+    //         price:0.00,
+    //     }
+    //     setProduct([...product,item])
+    // }
     useEffect(()=>{
         countTotal(product)
     },[product])
@@ -83,26 +86,37 @@ const Sale=()=>
             const new_item={
                 id:productID,
                 product_title:product_title,
-                quantity:0,
+                quantity:1,
                 price:0.00
             }
             setProduct([...product,new_item])
         }else{
-            
             const new_items=product.map(prdct=>prdct.id==productID?{...prdct,quantity:prdct.quantity+1}:prdct)
             setProduct(new_items)
         }
+        ref_input.current.value=''
+    }
+
+    const handleShowResult=(signal)=>
+    {
+        setShowREsult(signal)
+        console.log(signal)
+    }
+
+    const enableResult=()=>
+    {
+        setShowREsult(false)
+        console.log("ok")
     }
 
     return(
-        <div className="row">
+        <div className="row" onClick={enableResult}>
             <form action="#" id="form">
                     <div className="panel panel-flat">
                         <div className="panel-body">
                             <div className="col-md-8">
-                                <a onClick={addNwItem} className="btn btn-success">+</a>
-                                <SearchInput handleItem={handleItem} />
-
+                                {/* <a onClick={addNwItem} className="btn btn-success">+</a> */}
+                                <SearchInput myref={ref_input} handleItem={handleItem} showResult={showResult} handleShowResult={handleShowResult} />
                                 <div className="col-sm-12">
                                     <div className="table-responsive">
                                         <table  className="table">
