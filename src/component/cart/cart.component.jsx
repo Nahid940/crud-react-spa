@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 
 const Cart=(props)=>
 {
-
-    
-
     return (
         <tr>
             <td><input type="text" className="form-control" name="product_title" onChange={(e)=>props.changeFuction(props.index,'title',e.target.value)} value={props.item.product_title} placeholder="Product Title"/></td>

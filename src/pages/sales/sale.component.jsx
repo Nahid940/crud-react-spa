@@ -1,6 +1,7 @@
 import React, { Component,useEffect,useState } from 'react'
 import Cart from '../../component/cart/cart.component'
 import arertify from 'alertifyjs'
+import SearchInput from '../../component/searchbox/search-input.component'
 
 const Sale=()=>
 {
@@ -72,6 +73,27 @@ const Sale=()=>
         setProduct(newItems)
     }
 
+    const handleItem=(item)=>
+    {
+        const {productID,product_title}=item
+        const itemExist=product.find(prodct=>prodct.id==productID)
+        
+        if(!itemExist)
+        {
+            const new_item={
+                id:productID,
+                product_title:product_title,
+                quantity:0,
+                price:0.00
+            }
+            setProduct([...product,new_item])
+        }else{
+            
+            const new_items=product.map(prdct=>prdct.id==productID?{...prdct,quantity:prdct.quantity+1}:prdct)
+            setProduct(new_items)
+        }
+    }
+
     return(
         <div className="row">
             <form action="#" id="form">
@@ -79,23 +101,24 @@ const Sale=()=>
                         <div className="panel-body">
                             <div className="col-md-8">
                                 <a onClick={addNwItem} className="btn btn-success">+</a>
-                                <div className="table-responsive">
-                                    <table  className="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Product Name</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
+                                <SearchInput handleItem={handleItem} />
 
-                                        <tbody>
+                                <div className="col-sm-12">
+                                    <div className="table-responsive">
+                                        <table  className="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
                                             {product.length?
-                                                product.map((prcdt,index)=><Cart item={prcdt} index={index} remove={removeItem} changeFuction={handleChange} key={index}/>)
-                                            :''}
-                                        </tbody>
-                                    </table>
+                                                <tbody>{product.map((prcdt,index)=><Cart item={prcdt} index={index} remove={removeItem} changeFuction={handleChange} key={index}/>)}</tbody>
+                                            :null}
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
 
