@@ -4,7 +4,7 @@ const Cart=(props)=>
 {
     return (
         <tr>
-            <td><input type="text" className="form-control" name="product_title" onChange={(e)=>props.changeFuction(props.index,'title',e.target.value)} value={props.item.product_title} placeholder="Product Title"/></td>
+            <td><input type="text" readOnly className="form-control" name="product_title" onChange={(e)=>props.changeFuction(props.index,'title',e.target.value)} value={props.item.product_title} placeholder="Product Title"/></td>
             <td> 
                 <div className="input-group bootstrap-touchspin">
                     <span className="input-group-btn">
