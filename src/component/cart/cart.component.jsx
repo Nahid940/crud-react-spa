@@ -8,11 +8,11 @@ const Cart=(props)=>
             <td> 
                 <div className="input-group bootstrap-touchspin">
                     <span className="input-group-btn">
-                        <button className="btn btn-danger bootstrap-touchspin-down legitRipple" type="button">-</button>
+                        <button  onClick={()=>props.decrement(props.index)} className="btn btn-danger bootstrap-touchspin-down legitRipple" type="button">-</button>
                     </span>
                         <input type="text" name="quantity" onChange={(e)=>props.changeFuction(props.index,'quantity',e.target.value)} value={props.item.quantity} className="touchspin-empty form-control"/>
                     <span className="input-group-btn">
-                        <button className="btn btn-success bootstrap-touchspin-up legitRipple" type="button">+</button>
+                        <button onClick={()=>props.increment(props.index)} className="btn btn-success bootstrap-touchspin-up legitRipple" type="button">+</button>
                     </span>
                 </div>    
             </td>

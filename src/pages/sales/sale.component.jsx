@@ -109,6 +109,24 @@ const Sale=()=>
         console.log("ok")
     }
 
+    const increment=(index)=>
+    {
+        const items=[...product]
+        items[index].quantity+=1
+        setProduct(items)
+    }
+
+    const decrement=(index)=>
+    {
+        const items=[...product]
+        const val=items[index].quantity-=1
+        if(val==0)
+        {
+            items.splice(index,1)
+        }
+        setProduct(items)
+    }
+
     return(
         <div className="row" onClick={enableResult}>
             <form action="#" id="form">
@@ -129,7 +147,7 @@ const Sale=()=>
                                                 </tr>
                                             </thead>
                                             {product.length?
-                                                <tbody>{product.map((prcdt,index)=><Cart item={prcdt} index={index} remove={removeItem} changeFuction={handleChange} key={index}/>)}</tbody>
+                                                <tbody>{product.map((prcdt,index)=><Cart increment={increment} decrement={decrement} item={prcdt} index={index} remove={removeItem} changeFuction={handleChange} key={index}/>)}</tbody>
                                             :null}
                                         </table>
                                     </div>
